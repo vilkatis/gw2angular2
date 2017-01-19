@@ -1,9 +1,15 @@
 export interface Account {
     id: string,
     name: string,
+    age: number,
     world: number,
-    commander: boolean,
     guilds: string[],
+    guild_leader: string[],
     created: Date,
-    access: string
+    access: string,
+    commander: boolean,
+    fractal_level: number,
+    daily_ap: number,
+    monthly_ap: number,
+    wvw_rank: number
 }

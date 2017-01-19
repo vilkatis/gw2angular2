@@ -7,13 +7,14 @@ import { Account } from '../models';
 @Injectable()
 
 export class AccountActions {
-    
+
     static LOAD_ACCOUNT = type('[Account] Load Account');
     static LOAD_ACCOUNT_SUCCESS = type('[Account] Load Account Success');
 
-    loadAccount(): Action {
+    loadAccount(key): Action {
         return {
-            type: AccountActions.LOAD_ACCOUNT
+            type: AccountActions.LOAD_ACCOUNT,
+            payload: key
         }
     }
 
