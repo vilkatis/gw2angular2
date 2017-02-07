@@ -1,4 +1,5 @@
 <h1>
   {{title}}
-  {{ (account$ | async).age | json }}
+  {{ (account$ | async).age | secondsToTime }} hours
+  {{ (account$ | async).name }}
 </h1>

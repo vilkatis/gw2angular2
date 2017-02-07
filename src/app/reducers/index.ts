@@ -3,12 +3,12 @@ import { storeLogger } from 'ngrx-store-logger';
 import { combineReducers } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import accountReducer, * as fromAccount from './account.reducer';
+import gw2Reducer, * as fromGw2 from './gw2.reducer';
 
 export interface AppState {
-    account: fromAccount.AccountState;
+    account: fromGw2.Gw2State;
 };
 
 export default compose(storeLogger(), storeFreeze, combineReducers)({
-    account: accountReducer
+    account: gw2Reducer
 })

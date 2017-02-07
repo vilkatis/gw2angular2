@@ -8,15 +8,15 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class AccountService {
+export class Gw2Service {
   private _url = 'https://api.guildwars2.com/v2';
 
   constructor(private _http: Http) {}
 
   getAccount(key: string): Observable<Account> {
     return this._http.get(this._url + '/account?access_token=' + key)
-               .map((res:Response) => res.json())
-               .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+               .map((res: Response) => res.json())
+               .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
 }

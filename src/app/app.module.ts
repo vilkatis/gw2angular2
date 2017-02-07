@@ -8,16 +8,18 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import reducer from './reducers';
 
-import { AccountActions } from './actions';
-import { AccountEffects } from './effects';
+import { Gw2Actions } from './actions';
+import { Gw2Effects } from './effects';
 
 import { AppComponent } from './app.component';
 
-import { AccountService, AuthService } from './services';
+import { Gw2Service } from './services';
+import { SecondsToTimePipe } from './pipes/seconds-to-time.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SecondsToTimePipe
   ],
   imports: [
     BrowserModule,
@@ -25,9 +27,9 @@ import { AccountService, AuthService } from './services';
     HttpModule,
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    EffectsModule.run(AccountEffects)
+    EffectsModule.run(Gw2Effects)
   ],
-  providers: [AccountActions, AccountService],
+  providers: [Gw2Actions, Gw2Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

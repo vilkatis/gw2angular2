@@ -1,9 +1,9 @@
-import { AccountEffects } from './account.effects';
+import { Gw2Effects } from './gw2.effects';
 
 export {
-    AccountEffects
+    Gw2Effects
 };
 
 export default [
-    AccountEffects
+    Gw2Effects
 ];

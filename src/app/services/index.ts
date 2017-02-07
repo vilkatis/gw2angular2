@@ -1,2 +1,1 @@
-export { AccountService } from './account.service';
-export { AuthService } from './auth.service';
+export { Gw2Service } from './gw2.service';

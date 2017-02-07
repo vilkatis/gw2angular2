@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './reducers';
-import { AccountActions } from './actions';
+import { Gw2Actions } from './actions';
 import { Account } from './models';
 
 @Component({
@@ -19,12 +19,12 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _store: Store<AppState>,
-    private _accountActions: AccountActions
+    private _gw2Actions: Gw2Actions
   ) {
     this.account$ = _store.select('account');
   }
 
   ngOnInit() {
-    this._store.dispatch(this._accountActions.loadAccount(this._key));
+    this._store.dispatch(this._gw2Actions.loadAccount(this._key));
   }
 }
