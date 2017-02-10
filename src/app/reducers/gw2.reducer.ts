@@ -1,9 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Gw2Actions } from '../actions';
-
-import { Gw2State } from './../store/store-data';
-
-export type Gw2State = Gw2State;
+import { Gw2State } from './../store/gw2-state';
 
 const initialState: Gw2State = {
     account: {
@@ -21,10 +18,10 @@ const initialState: Gw2State = {
         monthly_ap: 0,
         wvw_rank: 0
     },
-    bankItems: [{id: 12345,count: 1}]
+    bankItems: [{id: 12345, count: 1}]
 };
 
-export default function (state = initialState, action: Action): Gw2State {
+export default function(state = initialState, action: Action): Gw2State {
     switch (action.type) {
 
         case Gw2Actions.LOAD_ACCOUNT_SUCCESS: {

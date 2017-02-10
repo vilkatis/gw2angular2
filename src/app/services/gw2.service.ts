@@ -1,3 +1,4 @@
+import { Item } from './../models/item.model';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -17,6 +18,12 @@ export class Gw2Service {
     return this._http.get(this._url + '/account?access_token=' + key)
                .map((res: Response) => res.json())
                .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getBankItems(key: string): Observable<Item[]> {
+    return this._http.get(this._url + '/account/bank?access_token=' + key)
+               .map((res: Response) => res.json())
+               .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
 }

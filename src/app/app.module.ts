@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import reducer from './reducers';
+import { reducer } from './reducers';
 
 import { Gw2Actions } from './actions';
 import { Gw2Effects } from './effects';

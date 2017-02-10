@@ -1,10 +1,6 @@
-import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { type } from '../util';
-
 import { Account, Item } from '../models';
-
-@Injectable()
+import { type } from '../util';
 
 export class Gw2Actions {
 

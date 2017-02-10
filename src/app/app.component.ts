@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { AppState } from './reducers';
+import { State } from './store/state';
 import { Gw2Actions } from './actions';
 import { Account } from './models';
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   account$: Observable<Account>;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store<State>,
     private _gw2Actions: Gw2Actions
   ) {
     this.account$ = _store.select('account');
