@@ -13,19 +13,3 @@ export interface Account {
     monthly_ap: number;
     wvw_rank: number;
 }
-
-export const initialAccountState: Account = {
-    id: '',
-    name: '',
-    age: 0,
-    world: 0,
-    guilds: [''],
-    guild_leader: [''],
-    created: new Date(Date.now()),
-    access: '',
-    commander: true,
-    fractal_level: 0,
-    daily_ap: 0,
-    monthly_ap: 0,
-    wvw_rank: 0
-};

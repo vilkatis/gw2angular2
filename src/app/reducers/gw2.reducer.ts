@@ -1,39 +1,23 @@
-import { Action } from '@ngrx/store';
-import { Gw2Actions } from '../actions';
-import { Gw2State } from './../store/gw2-state';
+/*
 
-const initialState: Gw2State = {
-    account: {
-        id: '',
-        name: '',
-        age: 0,
-        world: 0,
-        guilds: [''],
-        guild_leader: [''],
-        created: new Date(Date.now()),
-        access: '',
-        commander: true,
-        fractal_level: 0,
-        daily_ap: 0,
-        monthly_ap: 0,
-        wvw_rank: 0
-    },
-    bankItems: [{id: 12345, count: 1}]
-};
+temp2.forEach(function (item, itemIndex) {
+    if (item != null) {
+        if (merged.length == 0) {
+            merged.push(item);
 
-export default function(state = initialState, action: Action): Gw2State {
-    switch (action.type) {
+        } else {
+            if (!merged.some(function (mergedItem, mergedIndex) {
+                console.log(mergedItem);
 
-        case Gw2Actions.LOAD_ACCOUNT_SUCCESS: {
-            return action.payload;
-        }
-
-        case Gw2Actions.LOAD_BANK_SUCCESS: {
-            return action.payload;
-        }
-
-        default: {
-            return state;
+            })) {
+                merged.push(item);
+            } else {
+                let targetItem = merged.filter(function (targetItem) { return targetItem.id === item.id; })[0];
+                targetItem.count += item.count;
+            }
         }
     }
-}
+
+});
+
+*/

@@ -10,10 +10,8 @@ export class Gw2Actions {
     static LOAD_BANK_SUCCESS = type('[GW2] Load Bank Success');
     static FILTER_BANK = type('[GW2] Filter Bank');
     static FILTER_BANK_SUCCESS = type('[GW2] Filter Bank Success');
-    static LOAD_CHARACTERS = type('[GW2] Load Characters');
-    static LOAD_CHARACTERS_SUCCESS = type('[GW2] Load Characters Success');
 
-    loadAccount(key: string): Action {
+    loadAccount(key): Action {
         return {
             type: Gw2Actions.LOAD_ACCOUNT,
             payload: key
@@ -27,7 +25,7 @@ export class Gw2Actions {
         };
     }
 
-    loadBank(key: string): Action {
+    loadBank(key): Action {
         return {
             type: Gw2Actions.LOAD_BANK,
             payload: key
@@ -41,7 +39,7 @@ export class Gw2Actions {
         };
     }
 
-    filterBank(): Action {
+        filterBank(): Action {
         return {
             type: Gw2Actions.FILTER_BANK
         };
@@ -53,21 +51,4 @@ export class Gw2Actions {
             payload: items
         };
     }
-
-    loadCharacters(key: string): Action {
-        return {
-            type: Gw2Actions.LOAD_CHARACTERS,
-            payload: key
-        };
-    }
-
-    loadCharactersSuccess(characters: string[]) {
-        return {
-            type: Gw2Actions.LOAD_CHARACTERS_SUCCESS,
-            payload: characters
-        };
-    }
-
-    loadCharactersInventory() {}
-
 }

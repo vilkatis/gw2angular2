@@ -1,9 +1,9 @@
+import { Gw2State } from './store/gw2-state';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { AppState } from './models/app-state.model';
-import { Gw2State } from './models/gw2-state.model';
+import { State } from './store/state';
 import { Gw2Actions } from './actions';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   gw2State$: Observable<Gw2State>;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store<State>,
     private _gw2Actions: Gw2Actions
   ) {
     this.gw2State$ = _store.select('gw2State');
@@ -27,6 +27,5 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this._store.dispatch(this._gw2Actions.loadAccount(this._key));
     this._store.dispatch(this._gw2Actions.loadBank(this._key));
-    this._store.dispatch(this._gw2Actions.loadCharacters(this._key));
   }
 }

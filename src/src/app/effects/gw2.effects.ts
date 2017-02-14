@@ -13,32 +13,23 @@ import { Gw2Service } from '../services';
 @Injectable()
 export class Gw2Effects {
 
-    @Effect() loadAccount$: Observable<Action> = this._actions$
+@Effect() loadAccount$: Observable<Action> = this._actions$
         .ofType(Gw2Actions.LOAD_ACCOUNT)
         .map(action => action.payload)
         .switchMap(key => this._gw2Service.getAccount(key))
         .map((account: Account) => this._gw2Actions.loadAccountSuccess(account));
 
-
-    @Effect() loadBank$: Observable<Action> = this._actions$
+@Effect() loadBank$: Observable<Action> = this._actions$
         .ofType(Gw2Actions.LOAD_BANK)
         .map(action => action.payload)
         .switchMap(key => this._gw2Service.getBankItems(key))
         .map((bankItems: Item[]) => this._gw2Actions.loadBankSuccess(bankItems));
 
-    @Effect() loadCharacters$: Observable<Action> = this._actions$
-        .ofType(Gw2Actions.LOAD_CHARACTERS)
-        .map(action => action.payload)
-        .switchMap(key => this._gw2Service.getCharacters(key))
-        .map((characters: string[]) => this._gw2Actions.loadCharactersSuccess(characters));
-
-    @Effect() loadCharacterSuccess$: Observable<Action> = this._actions$
-        .ofType(Gw2Actions.LOAD_CHARACTERS_SUCCESS);
 
     constructor(
         private _actions$: Actions,
         private _gw2Actions: Gw2Actions,
         private _gw2Service: Gw2Service
-    ) { }
+    ) {}
 
 }

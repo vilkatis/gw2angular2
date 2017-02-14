@@ -1,4 +1,3 @@
-import { Bag } from './../models/bag.model';
 import { Item } from './../models/item.model';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
@@ -27,16 +26,13 @@ export class Gw2Service {
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
-  getCharacters(key: string): Observable<string[]> {
+  getCharacters(key: string): Observable<Array<string>> {
     return this._http.get(this._url + '/characters?access_token=' + key)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
-  getCharacterInventory(key: string, characterName: string): Observable<Bag[]> {
-    return this._http.get(encodeURI(`${this._url}/characters/${characterName}/inventory?acces_token=${key}`))
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'server error'));
-  }
+  // getCharacterInventory(key: string, characterName: string): Observable<string> {return 'yes';}
+
 
 }
