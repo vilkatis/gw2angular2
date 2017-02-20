@@ -1,5 +1,5 @@
 <h1>
   {{title}}
-  {{ (gw2State$ | async).account.age | secondsToTime }} hours
-  {{ (gw2State$ | async).account.name }}
+  {{ (gw2State$ | async)?.account.age | mySecondsToTime }} hours
+  {{ (gw2State$ | async)?.account.name }}
 </h1>

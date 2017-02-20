@@ -1,10 +1,10 @@
-import { Bag } from './../models/bag.model';
-import { Item } from './../models/item.model';
+import { Bag } from '../models/bag.model';
+import { Item } from '../models/item.model';
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Account } from '../models';
+import { Gw2Account } from '../models';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -12,31 +12,37 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class Gw2Service {
   private _url = 'https://api.guildwars2.com/v2';
+  private _key = '';
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http) {
+    this._key = '0DBADFA3-6130-834F-90B0-3BCC56C14F4F4DC162EC-A4F4-4229-AB7A-77CED0013470';
+  }
 
-  getAccount(key: string): Observable<Account> {
-    return this._http.get(this._url + '/account?access_token=' + key)
+  public getAccount(): Observable<Gw2Account> {
+    return this._http.get(this._url + '/account?access_token=' + this._key)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getBankItems(key: string): Observable<Item[]> {
-    return this._http.get(this._url + '/account/bank?access_token=' + key)
+  public getBankItems(): Observable<Item[]> {
+    return this._http.get(this._url + '/account/bank?access_token=' + this._key)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
-  getCharacters(key: string): Observable<string[]> {
-    return this._http.get(this._url + '/characters?access_token=' + key)
+  public getCharacterNames(): Observable<string[]> {
+    return this._http.get(this._url + '/characters?access_token=' + this._key)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
-  getCharacterInventory(key: string, characterName: string): Observable<Bag[]> {
-    return this._http.get(encodeURI(`${this._url}/characters/${characterName}/inventory?acces_token=${key}`))
+  public getCharacterInventory(characterName: string): Observable<Bag[]> {
+    return this._http.get(
+      this._url + '/characters/' + encodeURI(characterName) + '/inventory?access_token=' + this._key
+    )
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+      .catch((error: any) => {
+        return Observable.throw(error.json().error || 'server error');
+      });
   }
-
 }

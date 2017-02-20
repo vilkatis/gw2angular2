@@ -4,8 +4,8 @@ import { Stats } from '../models';
 export interface Item {
     id: number;
     count: number;
-    infusions?: Array<number>;
-    upgrades?: Array<number>;
+    infusions?: number[];
+    upgrades?: number[];
     skin?: number;
     stats?: Stats;
     charges?: number;

@@ -1,32 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+/*
+ * Angular 2 decorators and services
+ */
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './models/app-state.model';
 import { Gw2State } from './models/gw2-state.model';
-import { Gw2Actions } from './actions';
+import { Gw2Actions } from './actions/gw2.actions';
+import { UiActions } from './actions/ui.actions';
+import { UiState } from './models/ui-state.model';
 
+/*
+ * App Component
+ * Top Level Component
+ */
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [
+    './app.component.css'
+  ],
+  templateUrl: 'app.component.html'
 })
-export class AppComponent implements OnInit {
-  title = 'GW2 App';
-  private _key = '0DBADFA3-6130-834F-90B0-3BCC56C14F4F4DC162EC-A4F4-4229-AB7A-77CED0013470';
+export class AppComponent implements OnInit, OnDestroy {
+  public title = 'GW2 App';
+  public key = '';
 
-  gw2State$: Observable<Gw2State>;
+  public gw2State$: Observable<Gw2State>;
+  public uiState$: Observable<UiState>;
 
   constructor(
     private _store: Store<AppState>,
-    private _gw2Actions: Gw2Actions
+    private _gw2Actions: Gw2Actions,
+    private _uiActions: UiActions
   ) {
     this.gw2State$ = _store.select('gw2State');
+    this.uiState$ = _store.select('uiState');
   }
 
-  ngOnInit() {
-    this._store.dispatch(this._gw2Actions.loadAccount(this._key));
-    this._store.dispatch(this._gw2Actions.loadBank(this._key));
-    this._store.dispatch(this._gw2Actions.loadCharacters(this._key));
+  public ngOnInit() {
+    this.uiState$.subscribe((val) => {this.key = val.key;return val;});
+    this._store.dispatch(this._uiActions.loadUi());
+    this._store.dispatch(this._gw2Actions.loadAccount());
+    this._store.dispatch(this._gw2Actions.loadBank());
+    this._store.dispatch(this._gw2Actions.loadCharacterNames());
+  }
+
+  public ngOnDestroy() {
   }
 }
