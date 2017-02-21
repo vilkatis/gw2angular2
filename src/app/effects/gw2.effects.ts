@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/forkJoin';
 
 import { Gw2Actions } from '../actions';
 import { Gw2Service } from '../services';
@@ -26,19 +27,17 @@ export class Gw2Effects {
     .switchMap(() => this._gw2Service.getBankItems())
     .map((bankItems: Item[]) => this._gw2Actions.loadBankSuccess(bankItems));
 
-  @Effect() private loadCharacters$: Observable<Action> = this._actions$
+  @Effect() private loadCharacterNames$: Observable<Action> = this._actions$
     .ofType(Gw2Actions.LOAD_CHARACTER_NAMES)
     .map((action) => action.payload)
     .switchMap(() => this._gw2Service.getCharacterNames())
-    .map((characterNames) => {
-        let characters: Character[];
-        characterNames.map((characterName) => {
-          console.log(characterName);
-        });
-        return characters;
-      }
-    )
-    .map((characters: Character[]) => this._gw2Actions.loadCharacterNamesSuccess(characters));
+    .map((characterNames: string[]) => this._gw2Actions.loadCharacterNamesSuccess(characterNames));
+
+  @Effect() private loadCharacterInventory$: Observable<Action> = this._actions$
+    .ofType(Gw2Actions.LOAD_CHARACTER_INVENTORY)
+    .map((action) => action.payload)
+    .switchMap((characterName) => this._gw2Service.getCharacterInventory(characterName))
+    .map((character: Character) => this._gw2Actions.loadCharactersInventorySuccess(character));
 
   constructor(private _actions$: Actions,
               private _gw2Actions: Gw2Actions,

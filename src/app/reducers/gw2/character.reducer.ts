@@ -8,6 +8,10 @@ export function characterReducer(state = [''], action: Action): string[] {
       return action.payload;
     }
 
+    case Gw2Actions.LOAD_CHARACTER_INVENTORY_SUCCESS: {
+      return action.payload;
+    }
+
     default: {
       return state;
     }

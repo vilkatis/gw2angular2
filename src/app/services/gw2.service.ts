@@ -8,6 +8,7 @@ import { Gw2Account } from '../models';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Character } from '../models/character.model';
 
 @Injectable()
 export class Gw2Service {
@@ -36,11 +37,17 @@ export class Gw2Service {
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
-  public getCharacterInventory(characterName: string): Observable<Bag[]> {
+  public getCharacterInventory(characterName: string): Observable<Character> {
     return this._http.get(
       this._url + '/characters/' + encodeURI(characterName) + '/inventory?access_token=' + this._key
     )
-      .map((res: Response) => res.json())
+      .map((res: Response) => {
+      let character: Character;
+      return character = {
+        name: characterName,
+        bags: res.json()
+      };
+    })
       .catch((error: any) => {
         return Observable.throw(error.json().error || 'server error');
       });
