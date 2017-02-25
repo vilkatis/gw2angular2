@@ -4,13 +4,13 @@ import { Item } from '../../models/gw2/items/item.model';
 
 export interface State {
   ids: number[];
-  data: Item[];
+  data: {[id: number]: Item[]};
   loaded: boolean;
 }
 
 export const initialState: State = {
   ids: [],
-  data: [],
+  data: {},
   loaded: false
 };
 
@@ -20,11 +20,15 @@ export function itemsReducer(state = initialState, action: Action): State {
     case Gw2Actions.LOAD_ITEMS_SUCCESS: {
       const itemData = action.payload;
       const itemIds = itemData.reduce((previousValue: number, currentValue: number) => {
-        previousValue = currentValue['id'];
+        previousValue = currentValue['data'];
       });
+      let itemArray = itemData.reduce((previousValue, currentValue) => {
+        previousValue[currentValue.id] = currentValue;
+        return previousValue;
+      }, {});
       return {
         ids: itemIds,
-        data: itemData,
+        data: itemArray,
         loaded: true
       };
     }

@@ -34,7 +34,7 @@ export class Gw2Effects {
         }
       });
       return [this._gw2Actions.loadItems(test),
-      this._gw2Actions.loadBankSuccess(bankItems)];
+        this._gw2Actions.loadBankSuccess(bankItems)];
     });
 
   @Effect() private loadCharacterNames$: Observable<Action> = this._actions$
@@ -53,13 +53,7 @@ export class Gw2Effects {
     .ofType(Gw2Actions.LOAD_ITEMS)
     .map((action) => action.payload)
     .switchMap((ids) => this._gw2Service.getItems(ids))
-    .map((items: Item[]) => {
-      let itemArray = items.reduce((previousValue, currentValue) => {
-        previousValue[currentValue.id] = currentValue;
-        return previousValue;
-      }, {});
-      return this._gw2Actions.loadItemsSuccess(itemArray);
-    });
+    .map((items: Item[]) => this._gw2Actions.loadItemsSuccess(items));
 
   constructor(private _actions$: Actions,
               private _gw2Actions: Gw2Actions,

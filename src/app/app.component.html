@@ -1,7 +1,7 @@
 <header>
   <a href="" class="logo"><img src="../assets/img/logo.png"></a>
   <div class="title">{{title}}</div>
-  <div class="name">{{ (gw2State$ | async)?.account.name }}</div>
+  <div class="name">{{ (gw2State$ | async)?.account.data.name }}</div>
 </header>
 <main>
   <aside></aside>
@@ -9,6 +9,6 @@
     <h1>
       {{ (gw2State$ | async)?.account.data.age | mySecondsToTime }} hours
     </h1>
-    <bank [bankSlots]="(gw2State$ | async).bank.bankSlots"></bank>
+    <bank [bankSlots]="(gw2State$ | async).bank" [items]="(gw2State$ | async).items.data"></bank>
   </article>
 </main>

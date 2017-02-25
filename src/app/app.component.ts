@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
       if (characters.length > 0) {
         characters.forEach(
           (character) => {
-            if(character) {
+            if (character) {
               return this._store.dispatch(this._gw2Actions.loadCharacterInventory(character));
             }
           }
@@ -65,8 +65,5 @@ export class AppComponent implements OnInit {
     this._store.dispatch(this._gw2Actions.loadAccount());
     this._store.dispatch(this._gw2Actions.loadBank());
     this._store.dispatch(this._gw2Actions.loadCharacterNames());
-  }
-
-  public ngOnDestroy() {
   }
 }

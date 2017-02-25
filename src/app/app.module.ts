@@ -19,6 +19,7 @@ import { Gw2Service } from './services';
  * Custom Angular Components
  */
 import { BankComponent } from './components/bank.component';
+import { BankSlotComponent } from './components/bank-slot.component';
 import { SecondsToTimePipe } from './pipes/seconds-to-time.pipe';
 
 /*
@@ -46,6 +47,7 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     BankComponent,
+    BankSlotComponent,
     SecondsToTimePipe
   ],
   imports: [ // import Angular's modules
