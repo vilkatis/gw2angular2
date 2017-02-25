@@ -1,12 +1,35 @@
 import { Action } from '@ngrx/store';
 import { Gw2Actions } from '../../actions';
-import { Item, initialItemState } from '../../models/item.model';
+import { ItemSlot } from '../../models/gw2/account/item-slot.model';
 
-export function bankReducer(state = [initialItemState], action: Action): Item[] {
+export interface State {
+  ids: number[];
+  bankSlots: ItemSlot[];
+  loaded: boolean;
+}
+
+export const initialState: State = {
+  ids: [],
+  bankSlots: [],
+  loaded: false
+};
+
+export function bankReducer(state = initialState, action: Action): State {
   switch (action.type) {
 
     case Gw2Actions.LOAD_BANK_SUCCESS: {
-      return action.payload;
+      const itemSlots = action.payload;
+      const itemIds = itemSlots.reduce((previousValue: number, currentValue: number) => {
+        if (currentValue !== null) {
+          previousValue = currentValue['id'];
+          return previousValue;
+        }
+      });
+      return {
+        ids: itemIds,
+        bankSlots: itemSlots,
+        loaded: true
+      };
     }
 
     default: {

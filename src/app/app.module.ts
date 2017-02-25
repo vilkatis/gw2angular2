@@ -14,6 +14,11 @@ import { Gw2Actions } from './actions';
 import { UiActions } from './actions/ui.actions';
 import { Gw2Effects } from './effects';
 import { Gw2Service } from './services';
+
+/*
+ * Custom Angular Components
+ */
+import { BankComponent } from './components/bank.component';
 import { SecondsToTimePipe } from './pipes/seconds-to-time.pipe';
 
 /*
@@ -40,6 +45,7 @@ const APP_PROVIDERS = [
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
+    BankComponent,
     SecondsToTimePipe
   ],
   imports: [ // import Angular's modules

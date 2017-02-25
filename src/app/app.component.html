@@ -1,5 +1,14 @@
-<h1>
-  {{title}}
-  {{ (gw2State$ | async)?.account.age | mySecondsToTime }} hours
-  {{ (gw2State$ | async)?.account.name }}
-</h1>
+<header>
+  <a href="" class="logo"><img src="../assets/img/logo.png"></a>
+  <div class="title">{{title}}</div>
+  <div class="name">{{ (gw2State$ | async)?.account.name }}</div>
+</header>
+<main>
+  <aside></aside>
+  <article>
+    <h1>
+      {{ (gw2State$ | async)?.account.data.age | mySecondsToTime }} hours
+    </h1>
+    <bank [bankSlots]="(gw2State$ | async).bank.bankSlots"></bank>
+  </article>
+</main>

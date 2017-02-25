@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
-import { Gw2Account, Item } from '../models';
+import { Gw2Account, ItemSlot } from '../models';
 import { type } from '../util';
-import { Character } from '../models/character.model';
+import { Character } from '../models/gw2/characters/character.model';
+import { Item } from '../models/gw2/items/item.model';
 
 export class Gw2Actions {
 
@@ -15,6 +16,8 @@ export class Gw2Actions {
   public static LOAD_CHARACTER_NAMES_SUCCESS = type('[GW2] Load Characters Success');
   public static LOAD_CHARACTER_INVENTORY = type('[GW2] Load Characters Inventory');
   public static LOAD_CHARACTER_INVENTORY_SUCCESS = type('[GW2] Load Characters Inventory Success');
+  public static LOAD_ITEMS = type('[GW2] Load Items');
+  public static LOAD_ITEMS_SUCCESS = type('[GW2] Load Items Success');
 
   public loadAccount(): Action {
     return {
@@ -35,7 +38,7 @@ export class Gw2Actions {
     };
   }
 
-  public loadBankSuccess(items: Item[]) {
+  public loadBankSuccess(items: ItemSlot[]) {
     return {
       type: Gw2Actions.LOAD_BANK_SUCCESS,
       payload: items
@@ -48,7 +51,7 @@ export class Gw2Actions {
     };
   }
 
-  public filterBankSuccess(items: Item[]) {
+  public filterBankSuccess(items: ItemSlot[]) {
     return {
       type: Gw2Actions.FILTER_BANK_SUCCESS,
       payload: items
@@ -68,7 +71,7 @@ export class Gw2Actions {
     };
   }
 
-  public loadCharacterInventory(characterName: string) {
+  public loadCharacterInventory(characterName: string): Action {
     return {
       type: Gw2Actions.LOAD_CHARACTER_INVENTORY,
       payload: characterName
@@ -79,6 +82,20 @@ export class Gw2Actions {
     return {
       type: Gw2Actions.LOAD_CHARACTER_INVENTORY_SUCCESS,
       payload: character
+    };
+  }
+
+  public loadItems(ids: number[]): Action {
+    return {
+      type: Gw2Actions.LOAD_ITEMS,
+      payload: ids
+    };
+  }
+
+  public loadItemsSuccess(items: { [id: number]: Item }) {
+    return {
+      type: Gw2Actions.LOAD_ITEMS_SUCCESS,
+      payload: items
     };
   }
 }

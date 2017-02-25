@@ -1,5 +1,5 @@
-import { Bag } from '../models/bag.model';
-import { Item } from '../models/item.model';
+import { Bag } from '../models/gw2/gw2-bag.model';
+import { ItemSlot } from '../models/gw2/account/item-slot.model';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -8,7 +8,8 @@ import { Gw2Account } from '../models';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Character } from '../models/character.model';
+import { Character } from '../models/gw2/characters/character.model';
+import { Item } from '../models/gw2/items/item.model';
 
 @Injectable()
 export class Gw2Service {
@@ -25,7 +26,7 @@ export class Gw2Service {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public getBankItems(): Observable<Item[]> {
+  public getBankItems(): Observable<ItemSlot[]> {
     return this._http.get(this._url + '/account/bank?access_token=' + this._key)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
@@ -51,5 +52,10 @@ export class Gw2Service {
       .catch((error: any) => {
         return Observable.throw(error.json().error || 'server error');
       });
+  }
+  public getItems(ids: number[]): Observable<Item[]> {
+    return this._http.get(this._url + '/items?access_token=' + this._key + '&ids=' + ids.join())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 }

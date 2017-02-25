@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { ActionReducer, combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
-import { storeLogger } from 'ngrx-store-logger';
+// import { storeLogger } from 'ngrx-store-logger';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { AppState } from '../models/app-state.model';
@@ -15,7 +15,7 @@ const reducers = {
 };
 
 const developmentReducer: ActionReducer<AppState> = compose(
-  storeLogger(),
+  // storeLogger(),
   storeFreeze,
   combineReducers
 )(reducers);
