@@ -22,7 +22,7 @@ export function characterReducer(state = initialState, action: Action): State {
     }
 
     case Gw2Actions.LOAD_CHARACTER_INVENTORY_SUCCESS: {
-      return Object.assign({}, state, {data: action.payload, loaded: true});
+      return Object.assign({}, state, {data: [action.payload , ...state.data], loaded: true});
     }
 
     default: {
