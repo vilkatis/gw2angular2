@@ -71,17 +71,17 @@ export class Gw2Actions {
     };
   }
 
-  public loadCharacterInventory(characterName: string): Action {
+  public loadCharactersInventory(characterName: string[]): Action {
     return {
       type: Gw2Actions.LOAD_CHARACTER_INVENTORY,
       payload: characterName
     };
   }
 
-  public loadCharactersInventorySuccess(character: Character) {
+  public loadCharactersInventorySuccess(characters: Character[]) {
     return {
       type: Gw2Actions.LOAD_CHARACTER_INVENTORY_SUCCESS,
-      payload: character
+      payload: characters
     };
   }
 

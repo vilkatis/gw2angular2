@@ -43,11 +43,17 @@ export class Gw2Effects {
     .switchMap(() => this._gw2Service.getCharacterNames())
     .map((characterNames: string[]) => this._gw2Actions.loadCharacterNamesSuccess(characterNames));
 
-  @Effect() private loadCharacterInventory$: Observable<Action> = this._actions$
+  @Effect() private loadCharactersInventory$: Observable<Action> = this._actions$
     .ofType(Gw2Actions.LOAD_CHARACTER_INVENTORY)
     .map((action) => action.payload)
-    .switchMap((characterName) => this._gw2Service.getCharacterInventory(characterName))
-    .map((character: Character) => this._gw2Actions.loadCharactersInventorySuccess(character));
+    .mergeMap((characterNames) => characterNames.map(
+      (characterName) => this._gw2Service.getCharacterInventory(characterName)
+    ))
+    .map((characters: Character[]) => {
+    console.log(characters);
+      return this._gw2Actions.loadCharactersInventorySuccess(characters);
+      }
+      );
 
   @Effect() private loadItems: Observable<Action> = this._actions$
     .ofType(Gw2Actions.LOAD_ITEMS)

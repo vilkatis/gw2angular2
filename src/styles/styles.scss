@@ -6,39 +6,8 @@
 @import 'reset.scss';
 @import '~bourbon/app/assets/stylesheets/_bourbon';
 
-html, body{
-  height: 100%;
-}
+.row {}
 
-body {
-  background: url('../assets/img/bg.jpg') no-repeat center center;
-  background-size: cover;
-  overflow: hidden;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-app {
-  @include display(flex);
-  @include flex-direction(column);
-  @include flex-grow(1);
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-app::after {
-  content: "";
-  background: url('../assets/img/secondbg.jpg') no-repeat center center;
-  background-size: cover;
-  opacity: 0.98;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-}
 
 header {
   @include display(flex);
@@ -46,19 +15,12 @@ header {
   @include align-content(center);
   @include align-items(center);
   position: relative;
-  height: 50px;
-  color: #FFF;
-  padding: 0 50px 0 100px;
-  background: rgba(256,180,124,0.1);
+  height: 55px;
+  border-bottom: 1px solid #cfd8dc;
   .title {
-    @include display(flex);
-    @include flex-grow(1);
     font-size: 2em;
-    color: #F5EBC7;
   }
   .name {
-    @include display(flex);
-    @include flex-shrink(1);
     font-weight: 300;
     position: relative;
     &:after {
@@ -72,35 +34,4 @@ header {
       margin-top: -4px;
     }
   }
-}
-
-.logo {
-  position: absolute;
-  left: -20px;
-  top:-20px;
-  width: 100px;
-  display: block;
-}
-
-main,
-article,
-aside {
-  height: 100%;
-}
-
-main {
-  @include display(flex);
-  @include flex-grow(1);
-  padding-left: 5px;
-}
-
-aside {
-  width: 50px;
-  padding-top: 100px;
-  background: rgba(0,0,0,0.9);
-  border-right: 2px solid rgba(255,255,255,0.6);
-}
-
-article {
-  @include flex-grow(1);
 }

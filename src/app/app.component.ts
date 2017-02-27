@@ -51,13 +51,7 @@ export class AppComponent implements OnInit {
 
     this.gw2Service.getCharacterNames().subscribe((characters) => {
       if (characters.length > 0) {
-        characters.forEach(
-          (character) => {
-            if (character) {
-              return this._store.dispatch(this._gw2Actions.loadCharacterInventory(character));
-            }
-          }
-        );
+        this._store.dispatch(this._gw2Actions.loadCharactersInventory(characters));
       }
       return characters;
     });

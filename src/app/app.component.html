@@ -1,7 +1,12 @@
 <header>
-  <a href="" class="logo"><img src="../assets/img/logo.png"></a>
-  <div class="title">{{title}}</div>
-  <div class="name">{{ (gw2State$ | async)?.account.data.name }}</div>
+    <div class="row">
+      <div class="columns">
+        <div class="title">{{title}}</div>
+      </div>
+      <div class="columns shrink">
+        <div class="name">{{ (gw2State$ | async)?.account.data.name }}</div>
+      </div>
+    </div>
 </header>
 <main>
   <aside></aside>
