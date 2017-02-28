@@ -47,12 +47,13 @@ export class Gw2Effects {
     .ofType(Gw2Actions.LOAD_CHARACTER_INVENTORY)
     .map((action) => action.payload)
     .mergeMap((characterName) => this._gw2Service.getCharacterInventory(characterName))
-    .map((character) => {
+    .mergeMap((character: Character) =>  {
+      let arrMap = [];
     character.bags.bags.map((bag) => {
-      if (bag !== null) {this._gw2Actions.loadTreasurySuccess(bag.inventory);}
+      if (bag !== null) {arrMap.push(this._gw2Actions.loadTreasurySuccess(bag.inventory));}
     });
-    return character; })
-    .map((character: Character) =>  this._gw2Actions.loadCharacterInventorySuccess(character));
+    return [...arrMap, this._gw2Actions.loadCharacterInventorySuccess(character)]
+   });
 
   @Effect() private loadItems: Observable<Action> = this._actions$
     .ofType(Gw2Actions.LOAD_ITEMS)
