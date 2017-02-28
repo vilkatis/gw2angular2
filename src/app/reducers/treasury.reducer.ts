@@ -15,10 +15,10 @@ export const initialState: State = {
 };
 
 export function treasuryReducer(state = initialState, action: Action): State {
-  console.log(action);
   switch (action.type) {
     case Gw2Actions.LOAD_TREASURY_SUCCESS: {
-      return Object.assign([], state, {data: [action.payload , ...state.data], loaded: true});
+      console.log(action);
+      return Object.assign({}, state, {data: [action.payload , ...state.data], loaded: true});
     }
     default: {
       return state;
