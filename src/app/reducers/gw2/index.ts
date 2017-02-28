@@ -8,12 +8,14 @@ import { accountReducer } from './account.reducer';
 import { bankReducer } from './bank.reducer';
 import { characterReducer } from './character.reducer';
 import { itemsReducer } from './items.reducer';
+import { treasuryReducer } from '../treasury.reducer';
 
 const gw2Reducers = {
   account: accountReducer,
   bank: bankReducer,
   characters: characterReducer,
-  items: itemsReducer
+  items: itemsReducer,
+  treasury: treasuryReducer
 };
 
 const developmentReducer: ActionReducer<Gw2State> = compose(combineReducers)(gw2Reducers);
