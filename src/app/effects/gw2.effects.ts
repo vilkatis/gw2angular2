@@ -28,44 +28,46 @@ export class Gw2Effects {
     .map((action) => action.payload)
     .switchMap(() => this._gw2Service.getBankItems())
     .mergeMap((bankItems: ItemSlot[]) => {
-      let test = bankItems.map((bankItem: ItemSlot) => {
-        if (bankItem !== null) {
-          return bankItem.id;
-        }
-      });
-      return [this._gw2Actions.loadItems(test),
-        this._gw2Actions.loadBankSuccess(bankItems)];
+      return [this._gw2Actions.loadBankSuccess(bankItems),
+        this._gw2Actions.loadTreasury(bankItems)];
     });
 
-  @Effect() private loadCharacterNames$: Observable<Action> = this._actions$
-    .ofType(Gw2Actions.LOAD_CHARACTER_NAMES)
+  @Effect() private loadCharacters$: Observable<Action> = this._actions$
+    .ofType(Gw2Actions.LOAD_CHARACTERS)
     .map((action) => action.payload)
-    .switchMap(() => this._gw2Service.getCharacterNames())
-    .map((characterNames: string[]) => this._gw2Actions.loadCharacterNamesSuccess(characterNames));
+    .switchMap(() => this._gw2Service.getCharacters())
+    .map((characters: Character[]) => this._gw2Actions.loadCharactersSuccess(characters));
 
-  @Effect() private loadCharacterInventory$: Observable<Action> = this._actions$
-    .ofType(Gw2Actions.LOAD_CHARACTER_INVENTORY)
-    .map((action) => action.payload)
-    .mergeMap((characterName) => this._gw2Service.getCharacterInventory(characterName))
-    .mergeMap((character: Character) =>  {
-      let arrMap = [];
-    character.bags.bags.map((bag) => {
-      if (bag !== null) {arrMap.push(this._gw2Actions.loadTreasurySuccess(bag.inventory));}
-    });
-    return [...arrMap, this._gw2Actions.loadCharacterInventorySuccess(character)]
-   });
-
-  @Effect() private loadItems: Observable<Action> = this._actions$
+  @Effect() private loadItems$: Observable<Action> = this._actions$
     .ofType(Gw2Actions.LOAD_ITEMS)
     .map((action) => action.payload)
     .switchMap((ids) => this._gw2Service.getItems(ids))
     .map((items: Item[]) => this._gw2Actions.loadItemsSuccess(items));
 
-
+  @Effect() private loadTreasury$: Observable<Action> = this._actions$
+    .ofType(Gw2Actions.LOAD_TREASURY)
+    .map((action) => action.payload)
+    .map((inventory) => inventory)
+    .map((inventory: ItemSlot[]) => this._gw2Actions.loadTreasurySuccess(inventory));
 
   constructor(private _actions$: Actions,
               private _gw2Actions: Gw2Actions,
               private _gw2Service: Gw2Service) {
   }
-
 }
+
+/*
+ @Effect() private loadCharacterInventory$: Observable<Action> = this._actions$
+ .ofType(Gw2Actions.LOAD_CHARACTER_INVENTORY)
+ .map((action) => action.payload)
+ .mergeMap((characterName) => this._gw2Service.getCharacterInventory(characterName))
+ .mergeMap((character: Character) => {
+ let arrMap = [];
+ character.bags.bags.map((bag) => {
+ if (bag !== null) {
+ arrMap.push(this._gw2Actions.loadTreasurySuccess(bag.inventory));
+ }
+ });
+ return [...arrMap, this._gw2Actions.loadCharacterInventorySuccess(character)];
+ });
+ */

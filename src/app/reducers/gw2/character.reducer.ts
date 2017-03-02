@@ -17,8 +17,8 @@ export const initialState: State = {
 export function characterReducer(state = initialState, action: Action): State {
   switch (action.type) {
 
-    case Gw2Actions.LOAD_CHARACTER_NAMES_SUCCESS: {
-      return Object.assign({}, state, {names: action.payload});
+    case Gw2Actions.LOAD_CHARACTERS_SUCCESS: {
+      return Object.assign({}, state, {data: [action.payload , ...state.data], loaded: true});
     }
 
     case Gw2Actions.LOAD_CHARACTER_INVENTORY_SUCCESS: {

@@ -12,12 +12,12 @@ export class Gw2Actions {
   public static LOAD_BANK_SUCCESS = type('[GW2] Load Bank Success');
   public static FILTER_BANK = type('[GW2] Filter Bank');
   public static FILTER_BANK_SUCCESS = type('[GW2] Filter Bank Success');
-  public static LOAD_CHARACTER_NAMES = type('[GW2] Load Characters');
-  public static LOAD_CHARACTER_NAMES_SUCCESS = type('[GW2] Load Characters Success');
   public static LOAD_CHARACTER_INVENTORY = type('[GW2] Load Characters Inventory');
   public static LOAD_CHARACTER_INVENTORY_SUCCESS = type('[GW2] Load Characters Inventory Success');
   public static LOAD_ITEMS = type('[GW2] Load Items');
   public static LOAD_ITEMS_SUCCESS = type('[GW2] Load Items Success');
+  public static LOAD_CHARACTERS = type('[GW2] Load Characters');
+  public static LOAD_CHARACTERS_SUCCESS = type('[GW2] Load Characters Success');
   public static LOAD_TREASURY = type('[GW2] Load Treasury');
   public static LOAD_TREASURY_SUCCESS = type('[GW2] Load Treasury Success');
 
@@ -60,16 +60,16 @@ export class Gw2Actions {
     };
   }
 
-  public loadCharacterNames(): Action {
+  public loadCharacters(): Action {
     return {
-      type: Gw2Actions.LOAD_CHARACTER_NAMES,
+      type: Gw2Actions.LOAD_CHARACTERS
     };
   }
 
-  public loadCharacterNamesSuccess(characterNames: string[]) {
+  public loadCharactersSuccess(characters: Character[]) {
     return {
-      type: Gw2Actions.LOAD_CHARACTER_NAMES_SUCCESS,
-      payload: characterNames
+      type: Gw2Actions.LOAD_CHARACTERS_SUCCESS,
+      payload: characters
     };
   }
 
@@ -100,6 +100,7 @@ export class Gw2Actions {
       payload: items
     };
   }
+
   public loadTreasury(inventory: ItemSlot[]): Action {
     return {
       type: Gw2Actions.LOAD_TREASURY,

@@ -17,8 +17,14 @@ export const initialState: State = {
 export function treasuryReducer(state = initialState, action: Action): State {
   switch (action.type) {
     case Gw2Actions.LOAD_TREASURY_SUCCESS: {
-      console.log(action);
-      return Object.assign({}, state, {data: [action.payload , ...state.data], loaded: true});
+      let mergedTreasury = [];
+      let stateTreasury = state.data;
+      stateTreasury = stateTreasury.concat(action.payload);
+      stateTreasury.forEach((slot) => {
+        if (slot !== null) {
+        }
+      });
+      return Object.assign({}, state, { data: mergedTreasury, loaded: true });
     }
     default: {
       return state;

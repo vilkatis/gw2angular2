@@ -38,24 +38,33 @@ export class Gw2Service {
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 
-  public getCharacterInventory(characterName: string): Observable<Character> {
-    return this._http.get(
-      this._url + '/characters/' + encodeURI(characterName) + '/inventory?access_token=' + this._key
-    )
-      .map((res: Response) => {
-      let character: Character;
-      return character = {
-        name: characterName,
-        bags: res.json()
-      };
-    })
-      .catch((error: any) => {
-        return Observable.throw(error.json().error || 'server error');
-      });
+  public getCharacters(): Observable<Character[]> {
+    return this._http.get(this._url + '/characters?page=0&access_token=' + this._key)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
+
   public getItems(ids: number[]): Observable<Item[]> {
     return this._http.get(this._url + '/items?access_token=' + this._key + '&ids=' + ids.join())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'server error'));
   }
 }
+
+/*
+ public getCharacterInventory(characterName: string): Observable<Character> {
+ return this._http.get(
+ this._url + '/characters/' + encodeURI(characterName) + '/inventory?access_token=' + this._key
+ )
+ .map((res: Response) => {
+ let character: Character;
+ return character = {
+ name: characterName,
+ bags: res.json()
+ };
+ })
+ .catch((error: any) => {
+ return Observable.throw(error.json().error || 'server error');
+ });
+ }
+ */
